@@ -96,8 +96,8 @@
                                         <div class="form-group col-6">
                                             <label>Type </label>
                                             <select required class="form-control" name="type" id="">
-                                                <option value="FOLLOW" {{ $data->type == 'FOLLOW' ? 'selected' : '' }}>
-                                                    FOLLOW
+                                                <option value="NOFOLLOW" {{ $data->type == 'NOFOLLOW' ? 'selected' : '' }}>
+                                                    NOFOLLOW
                                                 </option>
                                                 <option value="DOFOLLOW" {{ $data->type == 'DOFOLLOW' ? 'selected' : '' }}>
                                                     DOFOLLOW</option>

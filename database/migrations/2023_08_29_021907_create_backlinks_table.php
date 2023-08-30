@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('url');
             $table->text('description', 500)->nullable();
             $table->string('domain_rating');
-            $table->enum('type', ['DOFOLLOW', 'FOLLOW']);
+            $table->enum('type', ['DOFOLLOW', 'NOFOLLOW']);
             $table->timestamps();
         });
     }

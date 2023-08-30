@@ -186,7 +186,7 @@
                             <div class="form-group col-6">
                                 <label>Type </label>
                                 <select required class="form-control" name="type" id="">
-                                    <option value="FOLLOW">FOLLOW</option>
+                                    <option value="NOFOLLOW">NOFOLLOW</option>
                                     <option value="DOFOLLOW">DOFOLLOW</option>
                                 </select>
 

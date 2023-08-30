@@ -10,7 +10,7 @@ class Backlink extends Model
     use HasFactory;
     protected $fillable = ['category_id', 'title', 'url', 'description', 'domain_rating', 'type'];
 
-    const TYPE_FOLLOW = 'FOLLOW';
+    const TYPE_NOFOLLOW = 'NOFOLLOW';
     const TYPE_DOFOLLOW = 'DOFOLLOW';
 
     public function category()
