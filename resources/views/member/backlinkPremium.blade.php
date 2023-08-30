@@ -1,5 +1,5 @@
 @extends('layouts.member')
-@section('title', 'Data backlink saya')
+@section('title', 'Backlink Premium')
 @section('content')
 
     <div class="content-wrapper">
@@ -31,12 +31,6 @@
                                     <div class="col-sm-6 col-lg-6">
                                         <h3 class="card-title mt-2 ">@yield('title')</h3>
                                     </div>
-                                    <div class="col-sm-6 col-lg-6  text-right ">
-                                        <a href="{{ route('dashboard.member.backlink.create') }}"
-                                            class="btn btn-success btn-sm m-1">
-                                            <i class="fa fa-plus"></i>
-                                            Tambah data</a>
-                                    </div>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -52,38 +46,16 @@
                                     </div>
                                 @endif
 
-                                <div class="text-center">
-                                    <a href="{{ route('dashboard.member.submit.backlink') }}"
-                                        class="btn btn-sm m-1 {{ !request()->category ? 'btn-primary' : 'btn-outline-primary' }}">All</a>
-                                    @foreach ($categories as $item)
-                                        <a href="{{ route('dashboard.member.submit.backlink', ['category' => $item->slug]) }}"
-                                            class="btn btn-sm m-1 
-                                            
-                                            @if (request()->category == $item->slug) @if ($item->slug == 'premium') btn-warning
 
-                                            @else
-                                            btn-primary @endif
-@else
-@if ($item->slug == 'premium') btn-light border border-warning
-
-                                            @else
-                                            btn-outline-primary @endif
-                                            @endif
-                                            ">
-                                            @if ($item->slug == 'premium')
-                                                <i class="fa fa-star"></i>
-                                            @endif
-                                            {{ $item->name }}
-                                        </a>
-                                    @endforeach
-                                </div>
                                 <hr>
                                 <table id="datatable" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th width="5%">No</th>
-                                            <th width="60%">Website</th>
-                                            <th width="20%">Kategori</th>
+                                            <th width="40%">Website</th>
+                                            <th width="15%" class="text-center">Kategori</th>
+                                            <th width="10%" class="text-center">Rating</th>
+                                            <th width="10%" class="text-center">Type</th>
                                             <th width="15%" class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -95,30 +67,33 @@
                                                     <b class="text-truncate"><a class="text-dark"
                                                             href="{{ $item->url }}">{{ $item->domain() }}</a></b>
                                                     <br>
-                                                    <span class="text-muted">{{ $item->url }}
+                                                    <span class="text-muted">{{ $item->description }}
                                                     </span>
                                                 </td>
-                                                <td class="align-middle">
-                                                    {{ $item->backlink->category->name }}
+                                                <td class="align-middle text-center">
+                                                    <span>{{ $item->category->name }}</span>
                                                 </td>
+                                                <td class="text-center align-middle">
+                                                    {{ $item->domain_rating }}
+                                                </td>
+                                                <td class="text-center align-middle">
+                                                    @if ($item->type == 'FOLLOW')
+                                                        <button class="btn btn-sm btn-success">{{ $item->type }}
+                                                        </button>
+                                                    @else
+                                                        <button class="btn btn-sm btn-primary">{{ $item->type }}</button>
+                                                    @endif
+                                                </td>
+
+
                                                 <td class="align-middle">
                                                     <div class="d-flex justify-content-center">
 
                                                         <a href="{{ $item->url }}" target="_BLANK"
                                                             class="m-1 btn btn-sm btn-primary" data-toggle="tooltip"
                                                             data-placement="top" title="Kunjungi Webiste"><i
-                                                                class="fa fa-link"></i></a>
+                                                                class="fa fa-link"></i> Kunjungi</a>
 
-                                                        <form class="d-inline"
-                                                            action="{{ route('dashboard.member.backlink.delete', $item->id) }}"
-                                                            method="post"
-                                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus data?');">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class="m-1 btn btn-sm btn-danger" data-toggle="tooltip"
-                                                                data-placement="top" title="Hapus item"><i
-                                                                    class="fa fa-trash"></i></button>
-                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>

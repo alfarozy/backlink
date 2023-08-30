@@ -53,7 +53,7 @@ class AuthMemberController extends Controller
                 Mail::to($request->email)->send(new MailActivationRegisterEmail($token));
             }
             DB::commit();
-            return redirect()->route('login')->with('msg', 'Akun anda berhasil terdaftar silahkan periksa email untuk aktivasi akun');
+            return redirect()->route('login')->with('msg', 'Akun anda berhasil terdaftar silahkan periksa email diabagian menu spam untuk aktivasi akun');
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();

@@ -45,6 +45,10 @@ class CategorySeeder extends Seeder
             [
                 'name' => 'Media sosial',
                 'slug' => 'media-sosial'
+            ],
+            [
+                'name' => 'Premium',
+                'slug' => 'premium'
             ]
         ];
 

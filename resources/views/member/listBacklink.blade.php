@@ -45,12 +45,32 @@
                                         {{ session()->get('error') }}
                                     </div>
                                 @endif
-                                <a href="{{ route('dashboard.member.listbacklink') }}"
-                                    class="btn btn-sm {{ !request()->category ? 'btn-primary' : 'btn-outline-primary' }}">All</a>
-                                @foreach ($categories as $item)
-                                    <a href="{{ route('dashboard.member.listbacklink', ['category' => $item->slug]) }}"
-                                        class="btn btn-sm {{ request()->category == $item->slug ? 'btn-primary' : 'btn-outline-primary' }}">{{ $item->name }}</a>
-                                @endforeach
+
+                                <div class="text-center">
+                                    <a href="{{ route('dashboard.member.listbacklink') }}"
+                                        class="btn btn-sm m-1 {{ !request()->category ? 'btn-primary' : 'btn-outline-primary' }}">All</a>
+                                    @foreach ($categories as $item)
+                                        <a href="{{ route('dashboard.member.listbacklink', ['category' => $item->slug]) }}"
+                                            class="btn btn-sm m-1 
+                                            
+                                            @if (request()->category == $item->slug) @if ($item->slug == 'premium') btn-warning
+
+                                            @else
+                                            btn-primary @endif
+@else
+@if ($item->slug == 'premium') btn-light border border-warning
+
+                                            @else
+                                            btn-outline-primary @endif
+                                            @endif
+                                            ">
+                                            @if ($item->slug == 'premium')
+                                                <i class="fa fa-star"></i>
+                                            @endif
+                                            {{ $item->name }}
+                                        </a>
+                                    @endforeach
+                                </div>
                                 <hr>
                                 <table id="datatable" class="table table-bordered table-hover">
                                     <thead>

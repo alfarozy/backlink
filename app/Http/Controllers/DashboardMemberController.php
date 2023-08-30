@@ -19,18 +19,33 @@ class DashboardMemberController extends Controller
     }
     public function listBacklink()
     {
-        $categories = Category::get();
+        $categories = Category::orderBy('id', 'desc')->get();
         if (request()->category) {
             $category = Category::where('slug', request('category'))->first();
-            $data = Backlink::where('category_id', $category->id)->get();
+            $data = Backlink::where('category_id', $category->id)->latest()->get();
         } else {
-            $data = Backlink::get();
+            $data = Backlink::whereNot('category_id', 9)->get();
         }
         return view('member.listBacklink', compact('data', 'categories'));
     }
+    public function backlinkPremium()
+    {
+        $categories = Category::orderBy('id', 'desc')->get();
+
+        if (request()->category) {
+            $category = Category::where('slug', request('category'))->first();
+            $data = MemberBacklink::whereHas('backlink', function ($query) use ($category) {
+                $query->where('category_id', $category->id);
+            })->get();
+        } else {
+            $data = MemberBacklink::get();
+        }
+        return view('member.backlinkPremium', compact('data', 'categories'));
+    }
     public function memberBacklink()
     {
-        $categories = Category::get();
+        $categories = Category::orderBy('id', 'desc')->get();
+
         if (request()->category) {
             $category = Category::where('slug', request('category'))->first();
             $data = MemberBacklink::whereHas('backlink', function ($query) use ($category) {
@@ -43,7 +58,7 @@ class DashboardMemberController extends Controller
     }
     public function memberBacklinkCreate()
     {
-        $data = Backlink::get();
+        $data = Backlink::whereNot('category_id', 9)->get();
         return view('member.memberBacklinkCreate', compact('data'));
     }
 

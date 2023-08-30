@@ -47,6 +47,7 @@ Route::middleware('auth:member')->group(function () {
     Route::get('/', [DashboardMemberController::class, 'index'])->name('dashboard.member.index');
     Route::get('/backlinks', [DashboardMemberController::class, 'listBacklink'])->name('dashboard.member.listbacklink');
     Route::get('/backlinks-saya', [DashboardMemberController::class, 'memberBacklink'])->name('dashboard.member.submit.backlink');
+    Route::get('/backlinks-premium', [DashboardMemberController::class, 'backlinkPremium'])->name('dashboard.member.backlink.premium');
     Route::get('/backlinks-saya/create', [DashboardMemberController::class, 'memberBacklinkCreate'])->name('dashboard.member.backlink.create');
     Route::post('/backlinks-saya/store', [DashboardMemberController::class, 'memberBacklinkStore'])->name('dashboard.member.backlink.store');
     Route::delete('/backlinks-saya/delete/{id}', [DashboardMemberController::class, 'memberBacklinkDelete'])->name('dashboard.member.backlink.delete');
