@@ -79,10 +79,10 @@
                                                     {{ $item->domain_rating }}
                                                 </td>
                                                 <td class="text-center align-middle">
-                                                    @if ($item->type == 'FOLLOW')
-                                                        <button class="btn btn-sm btn-success">{{ $item->type }} </button>
+                                                    @if ($item->type == 'NOFOLLOW')
+                                                        <button class="btn btn-sm btn-danger">{{ $item->type }} </button>
                                                     @else
-                                                        <button class="btn btn-sm btn-primary">{{ $item->type }}</button>
+                                                        <button class="btn btn-sm btn-success">{{ $item->type }}</button>
                                                     @endif
                                                 </td>
 
