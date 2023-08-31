@@ -20,7 +20,11 @@ class Backlink extends Model
 
     public function domain()
     {
-        $parsedUrl = parse_url($this->url);
-        return $parsedUrl['host'];
+        try {
+            $parsedUrl = parse_url($this->url);
+            return $parsedUrl['host'];
+        } catch (\Throwable $th) {
+            return $this->url;
+        }
     }
 }
