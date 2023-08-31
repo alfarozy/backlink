@@ -24,7 +24,7 @@ class Backlink extends Model
             $parsedUrl = parse_url($this->url);
             return $parsedUrl['host'];
         } catch (\Throwable $th) {
-            return $this->url;
+            return $this->title;
         }
     }
 }
