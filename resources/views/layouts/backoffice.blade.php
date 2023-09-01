@@ -107,6 +107,7 @@
             "info": true,
             "autoWidth": true,
             "responsive": true,
+            "pageLength": 50
         });
         $('.custom-file-input').on('change', function() {
             let filename = $(this).val().split('\\').pop();
