@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-success elevation-4">
     <!-- Brand Logo -->
-    <a href="/" class="brand-link">
+    <a href="/admin" class="brand-link">
 
         <span class="brand-text font-weight-light"><b class="ml-3">Dashboard</b></span>
     </a>

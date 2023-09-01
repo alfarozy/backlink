@@ -14,7 +14,7 @@ class BacklinkController extends Controller
         if (!($limit = request()->limit)) {
             $limit = 25;
         }
-        $data = Backlink::latest()->paginate($limit);
+        $data = Backlink::latest()->get();
         $categories = Category::get();
         return view('backoffice.backlink.index', compact('data', 'categories'));
     }
