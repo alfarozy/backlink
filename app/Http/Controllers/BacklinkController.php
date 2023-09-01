@@ -56,8 +56,8 @@ class BacklinkController extends Controller
         ]);
         $data = Backlink::where('id', $id)->first();
         $check = Backlink::where('url', $attr['url'])->first();
-        if ($data->id != $check->id) {
-            if ($check) {
+        if ($check) {
+            if ($data->id != $check->id) {
                 return redirect()->route('backlink.index')->with('error', 'Data gagal disimpan, Url sudah tersedia');
             }
         }
