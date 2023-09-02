@@ -54,7 +54,8 @@
                                     <thead>
                                         <tr>
                                             <th width="5%">No</th>
-                                            <th width="40%">Website</th>
+                                            <th width="30%">Website</th>
+                                            <th width="15%" class="text-center">Harga</th>
                                             <th width="15%" class="text-center">Kategori</th>
                                             <th width="10%" class="text-center">Rating</th>
                                             <th width="10%" class="text-center">Type</th>
@@ -71,6 +72,9 @@
                                                     <br>
                                                     <span class="text-muted">{{ $item->description }}
                                                     </span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span>{{ currencyIDR($item->price) }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span>{{ $item->category->name }}</span>
@@ -171,9 +175,9 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group col-4">
                                 <label>Kategori </label>
-                                <select required class="form-control" name="category_id" id="">
+                                <select required class="form-control category" name="category_id" id="">
                                     @foreach ($categories as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
@@ -183,7 +187,7 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group col-4">
                                 <label>Type </label>
                                 <select required class="form-control" name="type" id="">
                                     <option value="NOFOLLOW">NOFOLLOW</option>
@@ -191,6 +195,14 @@
                                 </select>
 
                                 @error('type')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group col-4">
+                                <label>Harga </label>
+                                <input disabled type="text" name="price" value="{{ old('price') }}"
+                                    class="price form-control @error('price') is-invalid @enderror">
+                                @error('price')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>

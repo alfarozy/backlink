@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Backlink;
 use App\Models\Category;
+use App\Models\Member;
 use App\Models\MemberBacklink;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,17 @@ class DashboardMemberController extends Controller
         $categories = Category::orderBy('id', 'desc')->get();
         if (request()->category) {
             $category = Category::where('slug', request('category'))->first();
-            $data = Backlink::where('category_id', $category->id)->latest()->get();
+            if (Auth()->guard('member')->user()->type == Member::TYPE_PREMIUM) {
+                $data = Backlink::where('category_id', $category->id)->latest()->get();
+            } else {
+                $data = Backlink::where('category_id', $category->id)->limit(40)->get();
+            }
         } else {
-            $data = Backlink::whereNot('category_id', 9)->get();
+            if (Auth()->guard('member')->user()->type == Member::TYPE_PREMIUM) {
+                $data = Backlink::whereNot('category_id', 9)->get();
+            } else {
+                $data = Backlink::whereNot('category_id', 9)->limit(40)->get();
+            }
         }
         return view('member.listBacklink', compact('data', 'categories'));
     }

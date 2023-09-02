@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Backlink extends Model
 {
     use HasFactory;
-    protected $fillable = ['category_id', 'title', 'url', 'description', 'domain_rating', 'type'];
+    protected $fillable = ['category_id', 'title', 'url', 'description', 'domain_rating', 'type', 'price'];
 
     const TYPE_NOFOLLOW = 'NOFOLLOW';
     const TYPE_DOFOLLOW = 'DOFOLLOW';

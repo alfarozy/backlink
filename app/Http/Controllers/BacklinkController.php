@@ -28,6 +28,7 @@ class BacklinkController extends Controller
             'domain_rating' => 'required',
             'type' => 'required',
             'description' => 'sometimes|nullable',
+            'price' => 'sometimes|nullable',
         ]);
         $check = Backlink::where('url', $attr['url'])->first();
         if ($check) {
@@ -53,6 +54,8 @@ class BacklinkController extends Controller
             'domain_rating' => 'required',
             'type' => 'required',
             'description' => 'sometimes|nullable',
+            'price' => 'sometimes|nullable',
+
         ]);
         $data = Backlink::where('id', $id)->first();
         $check = Backlink::where('url', $attr['url'])->first();

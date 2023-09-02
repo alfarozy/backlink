@@ -99,6 +99,15 @@
     <script src="/assets/js/tagsinput.js"></script>
     @yield('script')
     <script>
+        $('.category').on('change', function() {
+            if ($(this).val() == 9) {
+                $('.price').removeAttr('disabled');
+            } else {
+                $('.price').attr('disabled', 'disabled');
+                $('.price').val('');
+
+            }
+        });
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         });
