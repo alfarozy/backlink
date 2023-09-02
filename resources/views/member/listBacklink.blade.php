@@ -77,6 +77,9 @@
                                         <tr>
                                             <th width="5%">No</th>
                                             <th width="40%">Website</th>
+                                            @if (request()->category == 'premium')
+                                                <th width="15%" class="text-center">Harga</th>
+                                            @endif
                                             <th width="15%" class="text-center">Kategori</th>
                                             <th width="10%" class="text-center">Rating</th>
                                             <th width="10%" class="text-center">Type</th>
@@ -94,6 +97,12 @@
                                                     <span class="text-muted">{{ $item->description }}
                                                     </span>
                                                 </td>
+                                                @if (request()->category == 'premium')
+                                                    <td class="align-middle text-center">
+                                                        <span>{{ currencyIDR($item->price) }}</span>
+                                                    </td>
+                                                @endif
+
                                                 <td class="align-middle text-center">
                                                     <span>{{ $item->category->name }}</span>
                                                 </td>
