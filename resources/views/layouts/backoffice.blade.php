@@ -100,7 +100,7 @@
     @yield('script')
     <script>
         $('.category').on('change', function() {
-            if ($(this).val() == 9) {
+            if ($(this).val() == 10) {
                 $('.price').removeAttr('disabled');
             } else {
                 $('.price').attr('disabled', 'disabled');
