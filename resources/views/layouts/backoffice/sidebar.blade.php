@@ -56,6 +56,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('premium-package.index') }}"
+                        class="nav-link {{ request()->routeIs('premium-package*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-gem"></i>
+                        <p>
+                            Paket premium
+                        </p>
+                    </a>
+                </li>
                 {{--
                     <li class="nav-item">
                         <a href="{{ route('member.index') }}"

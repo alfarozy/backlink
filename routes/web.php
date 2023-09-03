@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardMemberController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ManageMemberController;
+use App\Http\Controllers\PremiumPackageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
         Route::resource("backlink", BacklinkController::class)->except('show', 'create');
         Route::resource("member", ManageMemberController::class)->except('destroy', 'update', 'create');
+
+        Route::resource("premium-package", PremiumPackageController::class)->except('show');
     });
 
 

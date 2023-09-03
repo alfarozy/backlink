@@ -1,5 +1,5 @@
 @extends('layouts.backoffice')
-@section('title', 'Technologies ')
+@section('title', 'Paket premium')
 @section('content')
 
     <div class="content-wrapper">
@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>List @yield('title')</h1>
+                        <h1> @yield('title')</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -33,9 +33,9 @@
                                         <h3 class="card-title mt-2 ">@yield('title')</h3>
                                     </div>
                                     <div class="col-sm-6 col-lg-6  text-right ">
-                                        <a href="{{ route('technology.create') }}" class="btn btn-success btn-sm m-1"> <i
-                                                class="fa fa-plus"></i>
-                                            Create New</a>
+                                        <a href="{{ route('premium-package.create') }}" class="btn btn-success btn-sm m-1">
+                                            <i class="fa fa-plus"></i>
+                                            Paket baru</a>
                                     </div>
                                 </div>
                             </div>
@@ -55,50 +55,38 @@
                                     <thead>
                                         <tr>
                                             <th width="5%">No</th>
-                                            <th width="15%">Technology</th>
-                                            <th width="50%">Description</th>
-                                            <th width="15%" class="text-center">Status</th>
+                                            <th width="20%">Nama paket</th>
+                                            <th width="60%">Description</th>
                                             <th width="15%" class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $item)
                                             <tr>
-                                                <td class="text-center align-middle">{{ $item->sequence }}</td>
-                                                <td class="text-center align-middle">
-                                                    <img class="col-6 rounded p-0" src="/storage/{{ $item->image }}"
-                                                        alt="" srcset="">
-                                                </td>
-                                                <td class="align-middle">
-                                                    <b>{{ $item->name }}</b>
-                                                    <p class="tect-muted">{{ $item->description }}</p>
-                                                </td>
+                                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
 
-                                                <td class="text-center align-middle">
-                                                    @if ($item->enabled == 1)
-                                                        <button class="btn btn-sm btn-success">Active</button>
-                                                    @else
-                                                        <button class="btn btn-sm btn-danger">Nonactive</button>
-                                                    @endif
-                                                </td>
+                                                <td class="align-middle">
+                                                    {{ $item->title }} </td>
+                                                <td class="align-middle">
+                                                    {{ $item->description }} </td>
+
                                                 <td class="align-middle">
                                                     <div class="d-flex justify-content-center">
-                                                        <a href="{{ route('technology.edit', $item->id) }}"
+                                                        <a href="{{ route('premium-package.edit', $item->id) }}"
                                                             class="m-1 btn btn-sm btn-secondary" data-bs-toggle="tooltip"
                                                             data-bs-placement="top" title="Update item"><i
                                                                 class="fa fa-edit"></i></a>
 
-                                                        @if ($item->enabled == 1)
-                                                            <a href="{{ route('technology.setActive', $item->id) }}"
-                                                                class="m-1 ml-2 btn btn-sm btn-danger"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                title="Disabled"><i class="fa fa-times"></i></a>
-                                                        @else
-                                                            <a href="{{ route('technology.setActive', $item->id) }}"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                title="Enabled" class="m-1 ml-2 btn btn-sm btn-success"><i
-                                                                    class="fa fa-check"></i></a>
-                                                        @endif
+                                                        <form class="d-inline"
+                                                            action="{{ route('premium-package.destroy', $item->id) }}"
+                                                            method="post"
+                                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus data?');">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button class="m-1 btn btn-sm btn-danger" data-toggle="tooltip"
+                                                                data-placement="top" title="Hapus item"><i
+                                                                    class="fa fa-trash"></i></button>
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>

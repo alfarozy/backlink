@@ -106,6 +106,7 @@
             "ordering": false,
             "info": true,
             "autoWidth": true,
+            "pageLength": 50,
             "responsive": true,
         });
         $('.custom-file-input').on('change', function() {

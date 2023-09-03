@@ -113,6 +113,7 @@
                                                                 data-placement="top" title="Hapus item"><i
                                                                     class="fa fa-trash"></i></button>
                                                         </form>
+
                                                     </div>
                                                 </td>
                                             </tr>
