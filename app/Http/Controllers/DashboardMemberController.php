@@ -26,7 +26,7 @@ class DashboardMemberController extends Controller
             if (Auth()->guard('member')->user()->type == Member::TYPE_PREMIUM) {
                 $data = Backlink::where('category_id', $category->id)->latest()->get();
             } else {
-                $data = Backlink::where('category_id', $category->id)->limit(40)->get();
+                $data = Backlink::where('category_id', $category->id)->limit(5)->get();
             }
         } else {
             if (Auth()->guard('member')->user()->type == Member::TYPE_PREMIUM) {
