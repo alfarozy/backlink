@@ -41,7 +41,7 @@
                                     @method('put')
                                     <div class="row">
 
-                                        <div class="col-6">
+                                        <div class="col-5">
 
                                             <div class="form-group">
                                                 <label>Nama paket </label>
@@ -53,7 +53,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-5">
 
                                             <div class="form-group">
                                                 <label>Harga paket </label>
@@ -61,6 +61,17 @@
                                                     value="{{ old('price') ?? $data->price }}"
                                                     class="form-control @error('price') is-invalid @enderror">
                                                 @error('price')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+                                                <label>Total bulan </label>
+                                                <input type="text" name="month" value="{{ $data->month }}"
+                                                    class="form-control @error('month') is-invalid @enderror">
+                                                @error('month')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>

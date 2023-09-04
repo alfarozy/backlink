@@ -67,6 +67,11 @@
                                     class="badge p-2 {{ Auth()->guard('member')->user()->type == 'FREE'? 'badge-secondary': 'badge-danger' }}">
                                     {{ Auth()->guard('member')->user()->type == 'FREE'? 'Akun gratis': 'Akun premium' }}</span>
 
+                                @if (Auth()->guard('member')->user()->type != 'FREE')
+                                    <span class="badge p-2 badge-light">
+                                        Berakhir pada {{ Auth()->guard('member')->user()->expired_date }}</span>
+                                @endif
+
                             </div>
                             <div class="icon">
                                 <i class="fa fa-user"></i>
