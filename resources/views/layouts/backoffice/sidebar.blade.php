@@ -75,8 +75,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('premium-package.index') }}"
-                        class="nav-link {{ request()->routeIs('premium-package*') ? 'active' : '' }}">
+                    <a href="{{ route('paket-member-premium.index') }}"
+                        class="nav-link {{ request()->routeIs('paket-member-premium*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-gem"></i>
                         <p>
                             Paket berlangganan

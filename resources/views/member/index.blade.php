@@ -56,13 +56,15 @@
                     <!-- ./col -->
                     <div class="col-lg-4 ">
                         <!-- small box -->
-                        <div class="small-box bg-light p-2">
+                        <div
+                            class="small-box {{ Auth()->guard('member')->user()->type == 'FREE'? 'bg-light': 'bg-warning' }} p-2">
                             <div class="inner">
-                                <h3 class="text-muted">Tipe akun
+                                <h3 class="">
+                                    Tipe akun
                                 </h3>
 
                                 <span
-                                    class="badge p-2 {{ Auth()->guard('member')->user()->type == 'FREE'? 'badge-secondary': 'badge-primary' }}">
+                                    class="badge p-2 {{ Auth()->guard('member')->user()->type == 'FREE'? 'badge-secondary': 'badge-danger' }}">
                                     {{ Auth()->guard('member')->user()->type == 'FREE'? 'Akun gratis': 'Akun premium' }}</span>
 
                             </div>

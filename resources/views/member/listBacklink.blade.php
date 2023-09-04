@@ -31,6 +31,11 @@
                                     <div class="col-sm-6 col-lg-6">
                                         <h3 class="card-title mt-2 ">@yield('title')</h3>
                                     </div>
+                                    <div class="col-sm-6 col-lg-6  text-right ">
+                                        <button type="button" class="btn btn-success btn-sm m-1"> <i
+                                                class="fab fa-whatsapp"></i>
+                                            Berlangganan untuk mendapatkan akses ({{ $totalbacklink }}) backlink</button>
+                                    </div>
                                 </div>
                             </div>
                             <!-- /.card-header -->

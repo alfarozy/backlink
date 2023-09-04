@@ -47,12 +47,21 @@
                         </p>
                     </a>
                 </li>
+                {{-- <li class="nav-item">
+                    <a href="{{ route('dashboard.member.premium') }}"
+                        class="nav-link {{ request()->routeIs('dashboard.member.premium') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-star"></i>
+                        <p>
+                            Member premium
+                        </p>
+                    </a>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('dashboard.member.backlink.premium') }}"
                         class="nav-link {{ request()->routeIs('dashboard.member.backlink.premium') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-star"></i>
                         <p>
-                            History premium
+                            backlink premium
                         </p>
                     </a>
                 </li>

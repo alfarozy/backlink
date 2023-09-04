@@ -1,5 +1,5 @@
 @extends('layouts.backoffice')
-@section('title', 'Paket premium')
+@section('title', 'Paket premium berlangganan')
 @section('content')
 
     <div class="content-wrapper">
@@ -33,7 +33,8 @@
                                         <h3 class="card-title mt-2 ">@yield('title')</h3>
                                     </div>
                                     <div class="col-sm-6 col-lg-6  text-right ">
-                                        <a href="{{ route('premium-package.create') }}" class="btn btn-success btn-sm m-1">
+                                        <a href="{{ route('paket-member-premium.create') }}"
+                                            class="btn btn-success btn-sm m-1">
                                             <i class="fa fa-plus"></i>
                                             Paket baru</a>
                                     </div>
@@ -57,7 +58,7 @@
                                             <th width="5%">No</th>
                                             <th width="20%">Nama paket</th>
                                             <th width="45%">Description</th>
-                                            <th width="15%">Description</th>
+                                            <th width="15%">Harga</th>
                                             <th width="15%" class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -75,21 +76,10 @@
 
                                                 <td class="align-middle">
                                                     <div class="d-flex justify-content-center">
-                                                        <a href="{{ route('premium-package.edit', $item->id) }}"
+                                                        <a href="{{ route('paket-member-premium.edit', $item->id) }}"
                                                             class="m-1 btn btn-sm btn-secondary" data-bs-toggle="tooltip"
                                                             data-bs-placement="top" title="Update item"><i
                                                                 class="fa fa-edit"></i></a>
-
-                                                        <form class="d-inline"
-                                                            action="{{ route('premium-package.destroy', $item->id) }}"
-                                                            method="post"
-                                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus data?');">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class="m-1 btn btn-sm btn-danger" data-toggle="tooltip"
-                                                                data-placement="top" title="Hapus item"><i
-                                                                    class="fa fa-trash"></i></button>
-                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>

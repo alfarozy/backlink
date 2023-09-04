@@ -74,9 +74,10 @@
                                                 <td class="align-middle">
                                                     <div class="d-flex justify-content-center">
 
-                                                        <a href="#" class="m-1 btn btn-sm btn-primary"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                                            title="Detail data"><i class="fa fa-address-card"></i></a>
+                                                        <a href="{{ route('member.show', $item->id) }}"
+                                                            class="m-1 btn btn-sm btn-primary" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" title="Detail data"><i
+                                                                class="fa fa-address-card"></i></a>
 
                                                         {{-- @if ($item->enabled == 1)
                                                             <a href="{{ route('users.setActive', $item->id) }}"

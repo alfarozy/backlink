@@ -36,7 +36,8 @@ class DashboardMemberController extends Controller
                 $data = Backlink::whereNot('category_id', 9)->limit(40)->get();
             }
         }
-        return view('member.listBacklink', compact('data', 'categories'));
+        $totalbacklink = Backlink::count();
+        return view('member.listBacklink', compact('data', 'categories', 'totalbacklink'));
     }
     public function backlinkPremium()
     {

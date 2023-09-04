@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardMemberController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ManageMemberController;
+use App\Http\Controllers\PackagePremiumMemberController;
 use App\Http\Controllers\PremiumPackageController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +28,8 @@ Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
         Route::resource("backlink", BacklinkController::class)->except('show', 'create');
-        Route::resource("member", ManageMemberController::class)->except('destroy', 'update', 'create');
+        Route::resource("member", ManageMemberController::class)->except('destroy', 'create', 'edit', 'store');
+        Route::resource("paket-member-premium", PackagePremiumMemberController::class)->except('destroy');
         Route::resource("data-backlink-premium", BacklinkPremiumController::class)->except('destroy', 'create');
 
         Route::resource("premium-package", PremiumPackageController::class)->except('show');
@@ -56,7 +58,6 @@ Route::middleware('auth:member')->group(function () {
     Route::post('/backlinks-saya/store/{id}', [DashboardMemberController::class, 'memberBacklinkStore'])->name('dashboard.member.backlink.store');
     Route::get('/backlinks-saya/{id}', [DashboardMemberController::class, 'memberBacklinkShow'])->name('dashboard.member.backlink.show');
 });
-
 
 Route::get('register', [AuthMemberController::class, 'registerView'])->name('register');
 Route::post('register', [AuthMemberController::class, 'register'])->name('register');
