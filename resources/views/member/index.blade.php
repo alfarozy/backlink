@@ -31,7 +31,7 @@
                             <div class="inner">
                                 <h3>{{ $total_member_backlink }}</h3>
 
-                                <p>Total submit link</p>
+                                <p>Premium backlink</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
