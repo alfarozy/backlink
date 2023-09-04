@@ -15,7 +15,7 @@ class DashboardController extends Controller
         $data = [
             'total_member' => Member::count(),
             'total_backlink' => Backlink::count(),
-            'total_member_backlink' => BacklinkPremium::where('member_id', auth()->guard('member')->user()->id)->count()
+            'total_member_backlink' => BacklinkPremium::count()
         ];
         return view('backoffice.index', $data);
     }

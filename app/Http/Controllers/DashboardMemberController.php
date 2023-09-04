@@ -15,7 +15,7 @@ class DashboardMemberController extends Controller
     {
         $data = [
             'total_backlink' => Backlink::count(),
-            'total_member_backlink' => MemberBacklink::where('member_id', auth()->guard('member')->user()->id)->count()
+            'total_member_backlink' => BacklinkPremium::where('member_id', auth()->guard('member')->user()->id)->count()
         ];
         return view('member.index', $data);
     }
