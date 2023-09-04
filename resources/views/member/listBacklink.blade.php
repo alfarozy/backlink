@@ -73,7 +73,7 @@
                                             @else
                                             btn-primary @endif
 @else
-@if ($item->slug == 'premium') btn-light border border-warning
+@if ($item->slug == 'premium') btn-danger
 
                                             @else
                                             btn-outline-primary @endif
