@@ -68,16 +68,8 @@ class DashboardMemberController extends Controller
 
     public function memberBacklinkStore(Request $request, $id)
     {
-        // protected $fillable = ['backlink_id', 'member_id', 'content', 'title', 'keywords', 'website', 'website_backlink', 'status', 'type'];
 
-        if ($request->type == 1) {
-            $attr = $request->validate([
-                'title' => 'required',
-                'content' => 'required',
-            ], [
-                '*required' => 'Bidang ini wajib',
-            ]);
-        }
+
         $attr = $request->validate([
             'keywords' => 'required',
             'website' => 'required',
@@ -85,11 +77,21 @@ class DashboardMemberController extends Controller
         ], [
             '*required' => 'Bidang ini wajib',
         ]);
+        if ($request->type == 1) {
+            $dataAttr = $request->validate([
+                'title' => 'required',
+                'content' => 'required',
+            ], [
+                '*required' => 'Bidang ini wajib',
+            ]);
+            $attr['title'] = $request->title;
+            $attr['content'] = $request->content;
+        }
 
         $attr['member_id'] = auth()->guard('member')->user()->id;
         $attr['backlink_id'] = $request->id;
         BacklinkPremium::create($attr);
-        return redirect()->route('dashboard.member.backlink.premium')->with('msg', 'Data berhasil disimpan');
+        return redirect()->back()->with('msg', 'Data berhasil disimpan');
     }
 
     public function memberBacklinkShow($id)

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('keywords');
             $table->string('website');
             $table->string('website_backlink')->nullable();
-            $table->enum('staus', ['WAITING', 'PROCESS', 'SUCCESS'])->default('WAITING');
+            $table->enum('status', ['WAITING', 'PROCESS', 'SUCCESS'])->default('WAITING');
             $table->tinyInteger('type');
             $table->timestamps();
         });

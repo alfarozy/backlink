@@ -93,6 +93,10 @@
                                                             class="m-1 btn btn-sm btn-secondary" data-toggle="tooltip"
                                                             data-placement="top" title="Update item"><i
                                                                 class="fa fa-edit"></i></a>
+                                                        <a href="{{ route('data-backlink-premium.show', $item->id) }}"
+                                                            class="m-1 btn btn-sm btn-primary" data-toggle="tooltip"
+                                                            data-placement="top" title="Update item"><i
+                                                                class="fas fa-file-alt"></i></a>
 
                                                         {{-- <form class="d-inline"
                                                             action="{{ route('backlink.destroy', $item->id) }}"

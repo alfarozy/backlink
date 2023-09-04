@@ -52,13 +52,13 @@
                                     <span>{{ $data->website_backlink ?? 'Belum di input' }}</span>
                                 </div>
 
+
                                 <div class="">
-                                    <span class="d-block"><b>Judul artikel</b></span>
-                                    <span>{{ $data->title ?? 'Belum di input' }}</span>
-                                </div>
-                                <div class="">
-                                    <span class="d-block"><b>Konten artikel</b></span>
-                                    <div>{!! $data->description ?? 'Belum di input' !!}</div>
+                                    <span class="d-block"><b>Artikel</b></span>
+                                    <div class="bg-light p-3 border rounded">
+                                        <h3>{{ $data->title }}</h3>
+                                        {!! $data->content ?? 'Belum di input' !!}
+                                    </div>
                                 </div>
 
                                 <div class="">
