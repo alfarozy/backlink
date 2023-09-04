@@ -1,4 +1,4 @@
-@extends('layouts.backoffice')
+@extends('layouts.member')
 @section('title', 'Detail backlink')
 @section('content')
     <div class="content-wrapper">
