@@ -28,13 +28,23 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="row justify-content-between">
-                                    <div class="col-sm-6 col-lg-6">
+                                    <div class="col-sm-6 col-lg-4">
                                         <h3 class="card-title mt-2 ">@yield('title')</h3>
                                     </div>
-                                    <div class="col-sm-6 col-lg-6  text-right ">
-                                        <button type="button" class="btn btn-success btn-sm m-1"> <i
-                                                class="fab fa-whatsapp"></i>
-                                            Berlangganan untuk mendapatkan akses ({{ $totalbacklink }}) backlink</button>
+                                    <div class="col-sm-6 col-lg-8  text-right ">
+                                        @if (Auth()->guard('member')->user()->type == 'FREE')
+
+                                            <button type="button" class="btn btn-success btn-sm m-1"> <i
+                                                    class="fab fa-whatsapp"></i>
+                                                Berlangganan untuk mendapatkan akses ({{ $totalbacklink }})
+                                                backlink</button>
+                                        @else
+                                            <button type="button" class="btn btn-primary btn-sm m-1"> <i
+                                                    class="fa fa-info-circle"></i> Sekarang akun anda sudah PREMIUM silahkan
+                                                nikmati
+                                                semua akses data backlink kami </button>
+
+                                        @endif
                                     </div>
                                 </div>
                             </div>
