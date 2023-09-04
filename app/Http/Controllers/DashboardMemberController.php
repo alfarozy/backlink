@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Backlink;
+use App\Models\BacklinkPremium;
 use App\Models\Category;
 use App\Models\Member;
 use App\Models\MemberBacklink;
@@ -39,17 +40,9 @@ class DashboardMemberController extends Controller
     }
     public function backlinkPremium()
     {
-        $categories = Category::orderBy('id', 'desc')->get();
 
-        if (request()->category) {
-            $category = Category::where('slug', request('category'))->first();
-            $data = MemberBacklink::whereHas('backlink', function ($query) use ($category) {
-                $query->where('category_id', $category->id);
-            })->get();
-        } else {
-            $data = MemberBacklink::get();
-        }
-        return view('member.backlinkPremium', compact('data', 'categories'));
+        $data = BacklinkPremium::where('member_id', auth()->guard('member')->id())->get();
+        return view('member.backlinkPremium', compact('data'));
     }
     public function memberBacklink()
     {
@@ -65,35 +58,43 @@ class DashboardMemberController extends Controller
         }
         return view('member.memberBacklink', compact('data', 'categories'));
     }
-    public function memberBacklinkCreate()
+    public function memberBacklinkCreate($id)
     {
-        $data = Backlink::whereNot('category_id', 9)->get();
-        return view('member.memberBacklinkCreate', compact('data'));
+        if (!$id) {
+            return abort(404);
+        }
+        return view('member.memberBacklinkCreate');
     }
 
-    public function memberBacklinkStore(Request $request)
+    public function memberBacklinkStore(Request $request, $id)
     {
+        // protected $fillable = ['backlink_id', 'member_id', 'content', 'title', 'keywords', 'website', 'website_backlink', 'status', 'type'];
+
+        if ($request->type == 1) {
+            $attr = $request->validate([
+                'title' => 'required',
+                'content' => 'required',
+            ], [
+                '*required' => 'Bidang ini wajib',
+            ]);
+        }
         $attr = $request->validate([
-            'backlink_id' => 'required|unique:member_backlinks',
-            'url' => 'required|unique:member_backlinks'
+            'keywords' => 'required',
+            'website' => 'required',
+            'type' => 'required',
         ], [
             '*required' => 'Bidang ini wajib',
-            'unique.url' => 'Url Sudah tersedia',
-            'unique.backlink_id' => 'Url Sudah tersedia',
         ]);
 
         $attr['member_id'] = auth()->guard('member')->user()->id;
-        MemberBacklink::create($attr);
-        return redirect()->route('dashboard.member.submit.backlink')->with('msg', 'Data berhasil disimpan');
+        $attr['backlink_id'] = $request->id;
+        BacklinkPremium::create($attr);
+        return redirect()->route('dashboard.member.backlink.premium')->with('msg', 'Data berhasil disimpan');
     }
 
-    public function memberBacklinkDelete($id)
+    public function memberBacklinkShow($id)
     {
-        $data = MemberBacklink::find($id);
-        if (!$data) {
-            return redirect()->route('dashboard.member.submit.backlink')->with('error', 'Data gagal dihapus');
-        }
-        $data->delete();
-        return redirect()->route('dashboard.member.submit.backlink')->with('msg', 'Data berhasil dihapus');
+        $data = backlinkPremium::find($id);
+        return view('member.memberBacklinkShow', compact('data'));
     }
 }

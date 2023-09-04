@@ -48,15 +48,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.member.submit.backlink') }}"
-                        class="nav-link {{ request()->routeIs('dashboard.member.submit.backlink*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-list"></i>
-                        <p>
-                            Submit backlink saya
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ route('dashboard.member.backlink.premium') }}"
                         class="nav-link {{ request()->routeIs('dashboard.member.backlink.premium') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-star"></i>

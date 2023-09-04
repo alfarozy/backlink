@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthMemberController;
 use App\Http\Controllers\BacklinkController;
+use App\Http\Controllers\BacklinkPremiumController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardMemberController;
 use App\Http\Controllers\ForgotPasswordController;
@@ -27,6 +28,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
         Route::resource("backlink", BacklinkController::class)->except('show', 'create');
         Route::resource("member", ManageMemberController::class)->except('destroy', 'update', 'create');
+        Route::resource("data-backlink-premium", BacklinkPremiumController::class)->except('destroy', 'create');
 
         Route::resource("premium-package", PremiumPackageController::class)->except('show');
     });
@@ -49,11 +51,10 @@ Route::prefix('admin')->group(function () {
 Route::middleware('auth:member')->group(function () {
     Route::get('/', [DashboardMemberController::class, 'index'])->name('dashboard.member.index');
     Route::get('/backlinks', [DashboardMemberController::class, 'listBacklink'])->name('dashboard.member.listbacklink');
-    Route::get('/backlinks-saya', [DashboardMemberController::class, 'memberBacklink'])->name('dashboard.member.submit.backlink');
     Route::get('/backlinks-premium', [DashboardMemberController::class, 'backlinkPremium'])->name('dashboard.member.backlink.premium');
-    Route::get('/backlinks-saya/create', [DashboardMemberController::class, 'memberBacklinkCreate'])->name('dashboard.member.backlink.create');
-    Route::post('/backlinks-saya/store', [DashboardMemberController::class, 'memberBacklinkStore'])->name('dashboard.member.backlink.store');
-    Route::delete('/backlinks-saya/delete/{id}', [DashboardMemberController::class, 'memberBacklinkDelete'])->name('dashboard.member.backlink.delete');
+    Route::get('/backlinks-saya/create/{id}', [DashboardMemberController::class, 'memberBacklinkCreate'])->name('dashboard.member.backlink.create');
+    Route::post('/backlinks-saya/store/{id}', [DashboardMemberController::class, 'memberBacklinkStore'])->name('dashboard.member.backlink.store');
+    Route::get('/backlinks-saya/{id}', [DashboardMemberController::class, 'memberBacklinkShow'])->name('dashboard.member.backlink.show');
 });
 
 

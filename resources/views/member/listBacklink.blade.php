@@ -76,7 +76,7 @@
                                     <thead>
                                         <tr>
                                             <th width="5%">No</th>
-                                            <th width="40%">Website</th>
+                                            <th width="35%">Website</th>
                                             @if (request()->category == 'premium')
                                                 <th width="15%" class="text-center">Harga</th>
                                             @endif
@@ -122,10 +122,17 @@
                                                 <td class="align-middle">
                                                     <div class="d-flex justify-content-center">
 
-                                                        <a href="{{ $item->url }}" target="_BLANK"
-                                                            class="m-1 btn btn-sm btn-primary" data-toggle="tooltip"
-                                                            data-placement="top" title="Kunjungi Webiste"><i
-                                                                class="fa fa-link"></i> Kunjungi</a>
+                                                        @if ($item->category->slug == 'premium')
+                                                            <a href="{{ route('dashboard.member.backlink.create', $item->id) }}"
+                                                                class="btn btn-success btn-sm m-1" data-toggle="tooltip"
+                                                                data-placement="top" title="Beli backlink"><i
+                                                                    class="fas fa-cart-plus"></i></a>
+                                                        @else
+                                                            <a href="{{ $item->url }}" target="_BLANK"
+                                                                class="m-1 btn btn-sm btn-primary" data-toggle="tooltip"
+                                                                data-placement="top" title="Kunjungi Webiste"><i
+                                                                    class="fa fa-link"></i> Kunjungi</a>
+                                                        @endif
 
                                                     </div>
                                                 </td>

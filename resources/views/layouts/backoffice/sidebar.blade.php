@@ -57,14 +57,33 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('data-backlink-premium.index') }}"
+                        class="nav-link {{ request()->routeIs('data-backlink-premium*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-cart-arrow-down"></i>
+                        <p>
+                            Data Pesanan
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('premium-package.index') }}"
                         class="nav-link {{ request()->routeIs('premium-package*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-gem"></i>
                         <p>
-                            Paket premium
+                            Paket layanan
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('premium-package.index') }}"
+                        class="nav-link {{ request()->routeIs('premium-package*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-gem"></i>
+                        <p>
+                            Paket berlangganan
+                        </p>
+                    </a>
+                </li>
+
                 {{--
                     <li class="nav-item">
                         <a href="{{ route('member.index') }}"

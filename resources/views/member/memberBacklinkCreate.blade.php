@@ -1,5 +1,19 @@
 @extends('layouts.member')
 @section('title', 'Tambah backlink saya')
+@section('style')
+    <style>
+        .ck-content {
+            height: 575px
+        }
+
+        .img-preview {
+            object-fit: cover;
+            object-position: center;
+            height: 200px;
+            width: 100%
+        }
+    </style>
+@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -28,34 +42,61 @@
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
                                     <h3 class="card-title mt-2">@yield('title')</h3>
-                                    <a href="{{ route('dashboard.member.submit.backlink') }}"
+                                    <a href="{{ route('dashboard.member.listbacklink') }}"
                                         class="btn btn-secondary btn-sm m-1"> <i class="fa fa-arrow-left"></i>
                                         Kembali</a>
                                 </div>
                             </div>
-                            <form method="POST" action="{{ route('dashboard.member.backlink.store') }}"
+                            <form method="POST" action="{{ route('dashboard.member.backlink.store', request()->id) }}"
                                 enctype="multipart/form-data">
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     @csrf
                                     <div class="form-group">
-                                        <label>Backlink </label>
-                                        <select name="backlink_id" class="form-control select2bs4" style="width:100%"
-                                            id="">
+                                        <label>URL Website anda </label>
+                                        <input type="url" name="website" value="{{ old('website') }}"
+                                            class="form-control @error('website') is-invalid @enderror">
+                                        @error('website')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label>Keywords</label>
+                                            <input type="text" name="keywords" value="{{ old('keywords') }}"
+                                                class="tags form-control @error('keywords') is-invalid @enderror">
+                                            @error('keywords')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @else
+                                                <small class="text-muted">Gunakan koma (,) untuk memisahkan keywords. Maksimal
+                                                    3 keywords</small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label>Tipe artikel </label>
+                                            <select required class="form-control type" name="type" id="">
+                                                <option value="1">Artikel Sendiri</option>
+                                                <option value="0">Artikel dari admin</option>
+                                            </select>
 
-                                            @foreach ($data as $item)
-                                                <option value="{{ $item->id }}">{{ $item->domain() }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('backlink_id')
+                                            @error('type')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Judul artikel</label>
+                                        <input type="text" name="title" value="{{ old('title') }}"
+                                            class="title form-control @error('title') is-invalid @enderror">
+                                        @error('title')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Url </label>
-                                        <input type="url" name="url" value="{{ old('url') }}"
-                                            class="form-control @error('url') is-invalid @enderror">
-                                        @error('url')
+                                        <label>Konten</label>
+                                        <textarea type="text" name="content" maxlength="100"
+                                            class="editor form-control @error('content') is-invalid @enderror"> {{ old('content') }}</textarea>
+                                        @error('content')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
@@ -78,21 +119,58 @@
 
 @section('script')
     <script>
-        $('.input-img').change(function() {
-            const file = this.files[0];
-            if (file && file.name.match(/\.(jpg|jpeg|png|svg)$/)) {
-                let reader = new FileReader();
-                reader.onload = function(event) {
-                    $('.image-preview').attr('src', event.target.result)
-                }
-                reader.readAsDataURL(file);
+        $('.tags').tagsinput({
+            maxTags: 3
+        });
+        $('.type').on('change', function() {
+
+            if ($(this).val() == 0) {
+
+                $('.title').attr('disabled', 'disabled');
+                $('.title').val('');
+                $('.editor').attr('disabled', 'disabled');
+                $('.editor').val('');
             } else {
-                alert('please upload image file');
+                $('.editor').removeAttr('disabled');
+                $('.title').removeAttr('disabled');
             }
         });
-        $('.custom-file-input').on('change', function() {
-            let filename = $(this).val().split('\\').pop();
-            $(this).next('.custom-file-label').addClass("selected").html(filename)
-        });
+    </script>
+    <script src="/assets/js/ckeditor.js"></script>
+    <script>
+        ClassicEditor.create(document.querySelector('.editor'), {
+
+                toolbar: {
+                    items: [
+                        'heading',
+                        '|',
+                        'bold', 'italic', 'bulletedList', 'numberedList', 'link',
+                        '|',
+                        'blockQuote',
+                        'insertTable',
+                        'imageInsert',
+                        '|',
+                        'code',
+                        'codeBlock'
+                    ]
+                },
+                language: 'id',
+                licenseKey: '',
+            })
+            .then(editor => {
+                window.editor = editor;
+
+
+
+
+            })
+            .catch(error => {
+                console.error('Oops, something went wrong!');
+                console.error(
+                    'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
+                );
+                console.warn('Build id: hosofu6grpb-m75gatu85ah8');
+                console.error(error);
+            });
     </script>
 @endsection
