@@ -10,4 +10,9 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'slug'];
+
+    public function backlinks()
+    {
+        return $this->hasMany(Backlink::class, 'category_id', 'id');
+    }
 }

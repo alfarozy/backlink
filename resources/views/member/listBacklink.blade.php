@@ -61,11 +61,12 @@
 
                                 <div class="text-center">
                                     <a href="{{ route('dashboard.member.listbacklink') }}"
-                                        class="btn btn-sm m-1 {{ !request()->category ? 'btn-primary' : 'btn-outline-primary' }}">All</a>
+                                        class="btn btn-sm m-1 {{ !request()->category ? 'btn-primary' : 'btn-outline-primary' }}">All
+                                        ({{ $data->count() }})</a>
 
                                     <a href="{{ route('dashboard.member.listbacklink', ['category' => 'premium']) }}"
                                         class="btn btn-sm m-1 btn-danger">
-                                        <i class="fa fa-star"></i> Premium
+                                        <i class="fa fa-star"></i> Premium ({{ $total_premium }})
                                     </a>
                                     @foreach ($categories as $item)
                                         <a href="{{ route('dashboard.member.listbacklink', ['category' => $item->slug]) }}"
@@ -75,7 +76,7 @@
                                             @else
                                             btn-outline-primary @endif
                                             ">
-                                            {{ $item->name }}
+                                            {{ $item->name }} ({{ $item->backlinks->count() }})
                                         </a>
                                     @endforeach
                                 </div>

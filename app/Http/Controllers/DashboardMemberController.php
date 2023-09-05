@@ -37,7 +37,10 @@ class DashboardMemberController extends Controller
             }
         }
         $totalbacklink = Backlink::count();
-        return view('member.listBacklink', compact('data', 'categories', 'totalbacklink'));
+        $total_premium = Backlink::whereHas('category', function ($query) {
+            $query->where('slug', 'premium');
+        })->count();
+        return view('member.listBacklink', compact('data', 'categories', 'totalbacklink', 'total_premium'));
     }
     public function backlinkPremium()
     {
