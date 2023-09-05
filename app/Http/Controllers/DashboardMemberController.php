@@ -21,7 +21,7 @@ class DashboardMemberController extends Controller
     }
     public function listBacklink()
     {
-        $categories = Category::orderBy('id', 'desc')->get();
+        $categories = Category::orderBy('id', 'desc')->whereNot('slug', 'premium')->get();
         if (request()->category) {
             $category = Category::where('slug', request('category'))->first();
             if (Auth()->guard('member')->user()->type == Member::TYPE_PREMIUM) {

@@ -33,7 +33,6 @@
                                     </div>
                                     <div class="col-sm-6 col-lg-8  text-right ">
                                         @if (Auth()->guard('member')->user()->type == 'FREE')
-
                                             <button type="button" class="btn btn-success btn-sm m-1"> <i
                                                     class="fab fa-whatsapp"></i>
                                                 Berlangganan untuk mendapatkan akses ({{ $totalbacklink }})
@@ -43,7 +42,6 @@
                                                     class="fa fa-info-circle"></i> Sekarang akun anda sudah PREMIUM silahkan
                                                 nikmati
                                                 semua akses data backlink kami </button>
-
                                         @endif
                                     </div>
                                 </div>
@@ -64,24 +62,19 @@
                                 <div class="text-center">
                                     <a href="{{ route('dashboard.member.listbacklink') }}"
                                         class="btn btn-sm m-1 {{ !request()->category ? 'btn-primary' : 'btn-outline-primary' }}">All</a>
+
+                                    <a href="{{ route('dashboard.member.listbacklink', ['category' => 'premium']) }}"
+                                        class="btn btn-sm m-1 btn-danger">
+                                        <i class="fa fa-star"></i> Premium
+                                    </a>
                                     @foreach ($categories as $item)
                                         <a href="{{ route('dashboard.member.listbacklink', ['category' => $item->slug]) }}"
                                             class="btn btn-sm m-1 
                                             
-                                            @if (request()->category == $item->slug) @if ($item->slug == 'premium') btn-warning
-
-                                            @else
-                                            btn-primary @endif
-@else
-@if ($item->slug == 'premium') btn-danger
-
+                                            @if (request()->category == $item->slug) btn-primary 
                                             @else
                                             btn-outline-primary @endif
-                                            @endif
                                             ">
-                                            @if ($item->slug == 'premium')
-                                                <i class="fa fa-star"></i>
-                                            @endif
                                             {{ $item->name }}
                                         </a>
                                     @endforeach
