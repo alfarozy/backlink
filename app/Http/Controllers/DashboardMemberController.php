@@ -95,7 +95,7 @@ class DashboardMemberController extends Controller
         $attr['member_id'] = auth()->guard('member')->user()->id;
         $attr['backlink_id'] = $request->id;
         BacklinkPremium::create($attr);
-        return redirect()->back()->with('msg', 'Data berhasil disimpan');
+        return redirect()->route('dashboard.member.backlink.premium')->with('msg', 'Data berhasil disimpan');
     }
 
     public function memberBacklinkShow($id)
